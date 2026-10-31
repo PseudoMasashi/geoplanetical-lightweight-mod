@@ -1,0 +1,7 @@
+node_modules/
+*.building
+app.asar*
+Geoplanetical.exe
+app.lightweight.bundle.js
+saves/
+profile/

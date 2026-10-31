@@ -1,0 +1,27 @@
+{
+  "modVersion": "1.1.0",
+  "originalBundleSha256": "2471feb3a34ea0b593ee6e57d59c4c0b742599fcf63375c7e29fc642d06b9032",
+  "modifiedBundleSha256": "f0366cb889768c80e1ade52b4d90e1e63ea8c6b76edec7a0317034910347017f",
+  "moduleSha256": "59d6e102b0be43daa9562cf904658eb05a759199a25fff86ba605843a1e692fa",
+  "hookCount": 4,
+  "patches": [
+    {
+      "find": "function AM(){XtA==null&&(XtA=requestAnimationFrame(Twe))}",
+      "replace": "function AM(){XtA==null&&(XtA=window.__geoLite.scheduleFrame(Twe))}"
+    },
+    {
+      "find": "fA=await Ml(\"new Globe\",()=>new d1(WA(\"globe-root\"),An,be)),iA=await Ml(\"new UI\"",
+      "replace": "fA=await Ml(\"new Globe\",()=>new d1(WA(\"globe-root\"),An,be)),window.__geoLite.attach({globe:fA,getSession:()=>GA,getState:()=>at,getFrameInterval:()=>NT,types:{SphereGeometry:Q3,ShaderMaterial:E1,Vector3:$}}),iA=await Ml(\"new UI\""
+    },
+    {
+      "find": "subscribeView(e,t={},n=!0){return this.request(Ko.VIEW_SUBSCRIBE,{viewId:e,params:t,active:n}).then(a=>{let r=Qw(a.snapshot);return n&&this.views.set(e,r),this.emit(`view:${e}`,n?r:null),r})}",
+      "replace": "subscribeView(e,t={},n=!0){return window.__geoLite.withCapturedParams(t,q=>this.request(Ko.VIEW_SUBSCRIBE,{viewId:e,params:q,active:n}).then(a=>{let r=window.__geoLite.retainCommittedView(this,e,q,n,a,Qw(a.snapshot));return n&&this.views.set(e,r),this.emit(`view:${e}`,n?r:null),r}))}"
+    },
+    {
+      "find": "viewSnapshot(e=\"shell\",t={}){return this.request(Ko.VIEW_SNAPSHOT,{viewId:e,params:t}).then(n=>Qw(n))}",
+      "replace": "viewSnapshot(e=\"shell\",t={}){return window.__geoLite.withCapturedParams(t,q=>window.__geoLite.deferFreshView(this,q,()=>this.request(Ko.VIEW_SNAPSHOT,{viewId:e,params:q}).then(n=>Qw(n))))}"
+    }
+  ],
+  "simulationFilesModified": [],
+  "name": "Geoplanetical Lightweight Graphics + Month-end Browsing"
+}

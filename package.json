@@ -1,0 +1,11 @@
+{
+  "name": "geoplanetical-lightweight-mod",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Experimental lightweight graphics and committed-panel browsing for one Geoplanetical build",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node tests/manifest.cjs && node tests/browsing.cjs && node tests/graphics.cjs"
+  }
+}
