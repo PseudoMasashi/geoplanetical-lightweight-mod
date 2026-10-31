@@ -1,5 +1,5 @@
 GEOPLANETICAL LIGHTWEIGHT GRAPHICS + MONTH-END BROWSING
-Community code modification, version 1.1.0, Windows x64.
+Community code modification, version 1.1.1, Windows x64.
 
 This is a shareable installer, not a Steam Workshop presentation pack.
 The built-in mod system does not load graphics or interface code.

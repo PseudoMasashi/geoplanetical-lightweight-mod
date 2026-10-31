@@ -1,0 +1,3 @@
+# Exact bytes matter for the adapter and reproducible installer archive.
+# Keep the committed line endings on every platform; ordinary text diffs still work.
+* -text

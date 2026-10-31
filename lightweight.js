@@ -3,7 +3,7 @@
   'use strict';
   const root = typeof window === 'undefined' ? globalThis : window;
   const STORAGE_KEY = 'geo.codex.lightweight.v1';
-  const VERSION = '1.1.0';
+  const VERSION = '1.1.1';
   let enabled = true;
   try { enabled = root.localStorage.getItem(STORAGE_KEY) !== 'off'; } catch (_) {}
   let responsive = true;

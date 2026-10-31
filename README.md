@@ -2,7 +2,7 @@
 
 An **experimental, unofficial Windows x64 mod** for players who want simpler graphics while keeping the game's strategy and simulation rules.
 
-**Compatibility is narrow:** v1.1.0 supports one inspected older game build labelled `1.0.0`. The installer checks the actual renderer SHA-256, because different updates can have the same version label. It refuses unknown or already modified bundles. **Do not assume a current game update is compatible.**
+**Compatibility is narrow:** v1.1.1 supports one inspected older game build labelled `1.0.0`. The installer checks the actual renderer SHA-256, because different updates can have the same version label. It refuses unknown or already modified bundles. **Do not assume a current game update is compatible.**
 
 ## Download and install
 
@@ -48,6 +48,7 @@ The installer modifies the copied renderer and updates the copied executable's A
 - `install.ps1` / `Install.cmd`: local, separate-copy installer.
 - `tests/`: tests that do not require the game.
 - `scripts/build-release.ps1`: builds the distributable ZIP from an explicit file list, using only PowerShell/.NET.
+- `.gitattributes`: preserves exact source bytes in Git checkouts, including Windows.
 
 With Node.js 20 or later, run:
 
