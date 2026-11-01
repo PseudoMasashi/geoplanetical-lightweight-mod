@@ -76,16 +76,21 @@ try {
     }
     $moduleBytes = [IO.File]::ReadAllBytes((Join-Path $PSScriptRoot 'lightweight.js'))
     if((Get-Sha256 $moduleBytes) -ne $mod.moduleSha256) { throw 'The mod files do not match their release manifest.' }
+    $monthEndBytes = [IO.File]::ReadAllBytes((Join-Path $PSScriptRoot 'month-end.js'))
+    if((Get-Sha256 $monthEndBytes) -ne $mod.monthEndModuleSha256) { throw 'The month-end module does not match its release manifest.' }
     $bundle = $utf8.GetString($originalBytes)
     foreach($patch in $mod.patches) {
         $first = $bundle.IndexOf([string]$patch.find,[StringComparison]::Ordinal)
         if($first -lt 0 -or $first -ne $bundle.LastIndexOf([string]$patch.find,[StringComparison]::Ordinal)) { throw 'A required integration point was not unique. No files were changed.' }
         $bundle = $bundle.Replace([string]$patch.find,[string]$patch.replace)
     }
-    $replacement = $utf8.GetBytes($utf8.GetString($moduleBytes) + [char]10 + $bundle)
-    if((Get-Sha256 $replacement) -ne $mod.modifiedBundleSha256) { throw 'The patched graphics bundle did not pass verification.' }
+    # Retain the exact known 1.1.1 graphics patch check before adding diagnostics.
+    $baseReplacement = $utf8.GetBytes($utf8.GetString($moduleBytes) + [char]10 + $bundle)
+    if((Get-Sha256 $baseReplacement) -ne $mod.basePatchedBundleSha256) { throw 'The patched graphics bundle did not pass verification.' }
+    $replacement = $utf8.GetBytes($utf8.GetString($moduleBytes) + [char]10 + $utf8.GetString($monthEndBytes) + [char]10 + $bundle)
+    $replacementHash = Get-Sha256 $replacement
     if($CheckOnly) {
-        [pscustomobject]@{Compatible=$true;ModVersion=$mod.modVersion;OriginalGameUnchanged=$true;BundleSha256=$mod.modifiedBundleSha256}
+        [pscustomobject]@{Compatible=$true;ModVersion=$mod.modVersion;OriginalGameUnchanged=$true;BundleSha256=$replacementHash}
         return
     }
     if(-not $Destination) { $Destination = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Geoplanetical-Lightweight' }
@@ -164,7 +169,7 @@ try {
     [Text.Encoding]::ASCII.GetBytes($newHeaderHash).CopyTo($exeBytes,$at)
     [IO.File]::WriteAllBytes((Join-Path $Destination 'Geoplanetical.exe'),$exeBytes)
     $exeText = $null
-    $installed = [pscustomobject]@{Mod=$mod.name;Version=$mod.modVersion;Source=$GameFolder;Destination=$Destination;OriginalBundleSha256=$mod.originalBundleSha256;ModifiedBundleSha256=$mod.modifiedBundleSha256;HeaderSha256=$newHeaderHash;SimulationFilesChanged=@();CreatedAt=[DateTime]::UtcNow.ToString('o')}
+    $installed = [pscustomobject]@{Mod=$mod.name;Version=$mod.modVersion;Source=$GameFolder;Destination=$Destination;OriginalBundleSha256=$mod.originalBundleSha256;BasePatchedBundleSha256=$mod.basePatchedBundleSha256;ModifiedBundleSha256=$replacementHash;HeaderSha256=$newHeaderHash;SimulationFilesChanged=@();CreatedAt=[DateTime]::UtcNow.ToString('o')}
     [IO.File]::WriteAllText((Join-Path $Destination 'Lightweight-mod.json'),($installed|ConvertTo-Json -Depth 10),$utf8)
     $launchCode = '$r=Get-Process -Name Geoplanetical -ErrorAction SilentlyContinue; if($r){Add-Type -AssemblyName System.Windows.Forms; [void][System.Windows.Forms.MessageBox]::Show(''Please save and close Geoplanetical before switching editions.'',''Geoplanetical Lightweight''); exit}; Start-Process -FilePath (Join-Path $env:GEO_LITE_DIR ''Geoplanetical.exe'') -WorkingDirectory $env:GEO_LITE_DIR'
     $quote = [char]34
