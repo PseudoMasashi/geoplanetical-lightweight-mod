@@ -8,9 +8,11 @@ if(-not $OutputFolder) { $OutputFolder = Join-Path $repoRoot 'downloads' }
 $manifest = Get-Content -LiteralPath (Join-Path $repoRoot 'mod.json') -Raw | ConvertFrom-Json
 $sourceHash = (Get-FileHash -LiteralPath (Join-Path $repoRoot 'lightweight.js') -Algorithm SHA256).Hash.ToLowerInvariant()
 if($sourceHash -ne $manifest.moduleSha256) { throw 'The adapter does not match its release manifest.' }
+$monthEndHash = (Get-FileHash -LiteralPath (Join-Path $repoRoot 'month-end.js') -Algorithm SHA256).Hash.ToLowerInvariant()
+if($monthEndHash -ne $manifest.monthEndModuleSha256) { throw 'The month-end module does not match its release manifest.' }
 $archiveName = 'Geoplanetical-Lightweight-Mod-' + $manifest.modVersion + '.zip'
 $archivePath = Join-Path $OutputFolder $archiveName
-$files = @('Install.cmd','LICENSE','NOTICE','README.md','README.txt','install.ps1','lightweight.js','mod.json')
+$files = @('Install.cmd','LICENSE','NOTICE','README.md','README.txt','install.ps1','lightweight.js','month-end.js','mod.json','scripts/inspect-economy.cjs')
 $file = [IO.File]::Open($archivePath,[IO.FileMode]::Create,[IO.FileAccess]::ReadWrite,[IO.FileShare]::None)
 try {
     $archive = New-Object IO.Compression.ZipArchive($file,[IO.Compression.ZipArchiveMode]::Create,$true)

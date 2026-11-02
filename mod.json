@@ -1,8 +1,9 @@
 {
-  "modVersion": "1.1.1",
+  "modVersion": "1.2.0",
   "originalBundleSha256": "2471feb3a34ea0b593ee6e57d59c4c0b742599fcf63375c7e29fc642d06b9032",
-  "modifiedBundleSha256": "43c63680140bad5d76b2f3f31a1d42b211a149f72617ae7a85c7c89a2751a88f",
+  "basePatchedBundleSha256": "43c63680140bad5d76b2f3f31a1d42b211a149f72617ae7a85c7c89a2751a88f",
   "moduleSha256": "a5bd20f700bc1ae2a89a0924eda0ba3e074805541f8eb5fac3090be1f4d9aaf2",
+  "monthEndModuleSha256": "79a0394e3f48eadf6e4257863e1c52a8593e3744e4e84753b68e426516a45de5",
   "hookCount": 4,
   "patches": [
     {

@@ -7,11 +7,12 @@ const manifest = JSON.parse(fs.readFileSync(path.join(root, 'mod.json'), 'utf8')
 const source = fs.readFileSync(path.join(root, 'lightweight.js'));
 const digest = crypto.createHash('sha256').update(source).digest('hex');
 assert.equal(digest, manifest.moduleSha256, 'Published adapter must match the installer manifest');
+assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'month-end.js'))).digest('hex'), manifest.monthEndModuleSha256);
 assert.equal(manifest.modVersion, require('../package.json').version);
 assert.equal(manifest.patches.length, manifest.hookCount);
 assert.deepEqual(manifest.simulationFilesModified, []);
 assert.equal(new Set(manifest.patches.map(p => p.find)).size, manifest.hookCount);
-for (const key of ['originalBundleSha256', 'modifiedBundleSha256', 'moduleSha256']) {
+for (const key of ['originalBundleSha256', 'basePatchedBundleSha256', 'moduleSha256', 'monthEndModuleSha256']) {
   assert.match(manifest[key], /^[a-f0-9]{64}$/);
 }
 console.log('Manifest and source hashes passed.');

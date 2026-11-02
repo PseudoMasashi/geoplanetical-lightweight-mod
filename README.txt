@@ -1,5 +1,7 @@
 GEOPLANETICAL LIGHTWEIGHT GRAPHICS + MONTH-END BROWSING
-Community code modification, version 1.1.1, Windows x64.
+Community code modification, version 1.2.0 development preview, Windows x64.
+Automated JavaScript checks pass; Windows install and a real month-end run
+remain to be validated for this update. Published release 1.1.1 is unchanged.
 
 This is a shareable installer, not a Steam Workshop presentation pack.
 The built-in mod system does not load graphics or interface code.
@@ -33,6 +35,13 @@ quotes are never replaced with stale values. Policy actions, saving and
 transaction boundaries keep the game's original safeguards.
 Unvisited panels with no committed data still have to wait.
 
+Settings > Graphics > Month-end map focus: On/Off (default On).
+During calculations, draw the idle map about once a second. Interacting with
+the map restores faster drawing. Capture and original graphics bypass this
+extra limit. The UI and simulation keep their existing application loop.
+Graphics settings show the last observed work interval and map CPU time.
+These are sampled renderer measurements, not worker or GPU profiling.
+
 GRAPHICS
 Normal Earth view uses simple land/sea shading and a lower-detail
 camera-facing spherical cap. Borders, labels, selections and strategic markers
@@ -60,12 +69,23 @@ Do not delete the normal Geoplanetical profile or saves.
 LIMITS
 Simulation workers, rules, country coverage and datasets are unchanged.
 This does not promise a shorter numerical monthly solve or 60 FPS.
+An automated fake-clock scenario reduced idle map draws from 50 to 10 over
+10 seconds. This is not a benchmark of the actual economic calculation.
 Rendering gains vary with zoom, overlays, other applications and hardware.
 Browsing keeps committed figures available; it never exposes partial results
 or invents data for an unloaded panel.
 
+ECONOMY SOURCE INSPECTION
+With Node.js 20+ installed, run from this extracted folder:
+node scripts/inspect-economy.cjs "C:\path\to\your\game"
+The read-only inspector creates diagnostics\economy-inspection.json with
+candidate source excerpts for growth, inflation, unemployment and month-end.
+It does not execute game code or read saves/profiles. Keep the report private;
+it contains local game source. Existing reports are never overwritten.
+The excerpts need analysis before any exact economic formula can be claimed.
+
 SHARING
 Share this ZIP whole. Do not distribute your copied game or personal profile.
-Source is lightweight.js and install.ps1.
+Source includes lightweight.js, month-end.js and install.ps1.
 Packaging reference:
 https://github.com/electron/electron/blob/main/docs/tutorial/asar-integrity.md
