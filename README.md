@@ -4,6 +4,10 @@ An **experimental, unofficial Windows x64 mod** for players who want simpler gra
 
 **Compatibility is narrow:** v1.1.1 supports one inspected older game build labelled `1.0.0`. The installer checks the actual renderer SHA-256, because different updates can have the same version label. It refuses unknown or already modified bundles. **Do not assume a current game update is compatible.**
 
+## Month-end calculation build: experimental opt-in
+
+An early-access full-month preparation build is available: [download version 1.2.0 experimental](experimental/month-ahead-1.2.0/Geoplanetical-Month-Preparation-1.2.0-experimental.zip). It is **not validated as a full-year equivalent or proven to reduce total elapsed time**. In one four-month native comparison, the exact-prefix check refused a result and the final state differed; player choices may not have matched. Your campaign may diverge, so back up saves first. The build requires Windows x64 and the exact inspected game build, uses extra CPU/RAM, and asks you to confirm the experimental risk during installation. It creates a separate game copy but shares the regular saves/profile. Not a Mod Studio or Steam Workshop pack. Read the included `README.txt` and `VALIDATION.txt`.
+
 ## Download and install
 
 Get the installer ZIP from the [latest release](https://github.com/PseudoMasashi/geoplanetical-lightweight-mod/releases/latest). No account is needed to download it.

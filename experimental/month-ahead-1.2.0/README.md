@@ -1,23 +1,7 @@
-# Experimental month-end preparation candidate
+# Month-end calculation candidate — experimental opt-in
 
-This folder preserves the source-only Geoplanetical Month Preparation 1.2.0 candidate for review and follow-up testing. It is **not a playable release**. The bundled installer deliberately refuses installation while correctness and performance acceptance remain unresolved.
+The 1.2.0 candidate is now offered for opt-in testing. It is not a validated release: a full same-choice year comparison has not passed, and one four-month native run refused promotion and ended in a different state. Research choices may not have matched. Back up saves first; outcomes can diverge from the original game.
 
-## Current evidence
+Download the ZIP in this folder, read its included `README.txt` and `VALIDATION.txt`, then run `Install.cmd` to see the explicit risk confirmation. The installer creates a separate game copy, enforces exact supported source hashes, and leaves the selected original installation files unchanged. The separate copy shares the normal game saves/profile.
 
-- Original Low-speed native baseline: four month-end waits of 62.1, 53.9, 55.4 and 56.9 seconds.
-- Candidate native run: 31.2, 18.8, 81.7 and 54.3 seconds. The first two prepared results were used; the third exact-prefix witness refused promotion. The final saved state differed from the original reference.
-- The user reports changing research in one run, so this four-month comparison does not establish identical choices. The mismatch is unresolved, not proof that the calculation rules changed.
-- Separate controlled unchanged-input runs passed exact saved-state comparisons for three consecutive closes and for a seeded one-month cancellation/restart. Full native year-end acceptance is still required.
-- Expected experience is some waiting: preparation can be invalidated by player actions, memory fallback, or work not completed before month-end. Zero waiting is not guaranteed.
-
-## Compatibility and use
-
-This candidate is for the inspected Windows x64 game build only and is incompatible with Mod Studio / Steam Workshop packs. It requires a separate-copy installer in a future approved release. Do not bypass its installer gate or install this candidate as a playable update.
-
-The ZIP includes mod source and scripts only. It excludes game binaries, artwork, saves and personal settings. Each player must supply their own game installation.
-
-## Required before a usable release
-
-Repeat the native month/year comparison with a recorded identical command sequence, diagnose the fresh mid-month recapture path, and demonstrate shorter total elapsed calendar time while all saved world sections and random state match. Then enable installation and publish a versioned release.
-
-See `Geoplanetical-Month-Preparation-1.2.0-experimental.zip` and its included `VALIDATION.txt` for the fuller handoff.
+This build is Windows x64 for the inspected game version only. It uses extra CPU and RAM and may still pause at month end. It cannot load through Mod Studio or Steam Workshop. The optimization remains under investigation; a better verified version is still planned.
